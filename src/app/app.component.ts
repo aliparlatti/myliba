@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -13,13 +14,19 @@ export class AppComponent {
   public users: any = [];
   public statusUpdate: boolean = false;
   public user_id: string = '';
-  getAllUsers() {
 
+  getAllUsers() {
     this.db.collection('users').snapshotChanges().subscribe((response) => {
       this.users = response.map(item =>
         Object.assign({ id: item.payload.doc.id }, item.payload.doc.data()),
       );
     })
+  }
+  alertSuccess(head:string,message:string){
+    Swal.fire(head, message, 'success');
+  }
+  alertWarning(head:string,message:string){
+    Swal.fire(head, message, 'error');
   }
   onUpdate(id: string) {
     this.statusUpdate = false;
@@ -35,9 +42,11 @@ export class AppComponent {
     };
     this.db.collection('users').doc(id).set(data);
     this.clearForm();
+   this.alertSuccess('Başarılı','Kayıt Güncellendi');
   }
   onDelete(id: string) {
     this.db.collection('users').doc(id).delete();
+    this.alertWarning('Başarılı','Kayıt Silindi');
   }
   onEdit(id: string) {
     this.user_id = id;
@@ -46,8 +55,8 @@ export class AppComponent {
     this.registerForm = this.formBuilder.group({
       name: user.name,
       mail: user.mail,
-      pass: user.pass
-    });
+      pass: user.pass,
+    }); 
   }
   ngOnInit(): void {
     this.clearForm();
@@ -80,6 +89,7 @@ export class AppComponent {
     };
     this.db.collection('users').add(data);
     this.clearForm();
+    this.alertSuccess('Başarılı','Kayıt Tamamlandı');
   }
 
   get rf() {
