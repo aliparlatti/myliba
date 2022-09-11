@@ -56,7 +56,7 @@ export class AppComponent {
       name: user.name,
       mail: user.mail,
       pass: user.pass,
-    }); 
+    });
   }
   ngOnInit(): void {
     this.clearForm();
@@ -95,5 +95,4 @@ export class AppComponent {
   get rf() {
     return this.registerForm.controls;
   }
-
 }
