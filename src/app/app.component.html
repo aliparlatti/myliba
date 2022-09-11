@@ -348,6 +348,7 @@
       </div>
       <div class="col-md-6 py-5 px-5">
         <div class="bg-gray mx-1 py-3 px-3 h-100">
+          <p class="text-center"><span class="text-red" >{{user_count}}</span> users listed</p>
           <div class="row mx-0 my-2 px-1 py-1 bg-user rounded-3" *ngFor="let user of users">
             <div class="col-md-7 d-flex align-items-center">
               <p>{{ user.name + ", " + user.mail }}</p>

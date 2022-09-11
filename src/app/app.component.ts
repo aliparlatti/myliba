@@ -14,12 +14,13 @@ export class AppComponent {
   public users: any = [];
   public statusUpdate: boolean = false;
   public user_id: string = '';
-
+  public user_count: number | undefined;
   getAllUsers() {
     this.db.collection('users').snapshotChanges().subscribe((response) => {
       this.users = response.map(item =>
         Object.assign({ id: item.payload.doc.id }, item.payload.doc.data()),
       );
+      this.user_count=response.length;
     })
   }
   alertSuccess(head:string,message:string){
