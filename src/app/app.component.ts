@@ -56,7 +56,7 @@ export class AppComponent {
       name: user.name,
       mail: user.mail,
       pass: user.pass,
-    }); 
+    });
   }
   ngOnInit(): void {
     this.clearForm();
@@ -91,9 +91,7 @@ export class AppComponent {
     this.clearForm();
     this.alertSuccess('Başarılı','Kayıt Tamamlandı');
   }
-
   get rf() {
     return this.registerForm.controls;
   }
-
 }
