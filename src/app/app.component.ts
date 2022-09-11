@@ -91,7 +91,6 @@ export class AppComponent {
     this.clearForm();
     this.alertSuccess('Başarılı','Kayıt Tamamlandı');
   }
-
   get rf() {
     return this.registerForm.controls;
   }
